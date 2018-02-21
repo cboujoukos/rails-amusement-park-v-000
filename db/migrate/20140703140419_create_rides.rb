@@ -1,3 +1,12 @@
 class CreateRides < ActiveRecord::Migration
-  # Write your migrations here
+  def up
+    create_table :rides do |t|
+      t.belongs_to :user
+      t.belongs_to :attraction
+    end
+  end
+
+  def down
+    drop_table :rides
+  end
 end

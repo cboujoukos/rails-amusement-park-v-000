@@ -1,0 +1,10 @@
+
+<% if current_user.admin? %>
+  <%= render partial: "attraction_admin", collection: @attractions, as: :attraction %>
+<% else %>
+  <%= render @attractions %>
+<% end %>
+<br>
+<% if can? :create, @attraction %>
+  <%= link_to "New Attraction", new_attraction_path %>
+<% end %>

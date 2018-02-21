@@ -19,7 +19,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-        <a class="navbar-brand" href="<%= root_url %>"/>Home</a>
+        <a class="navbar-brand" href="<%= !!current_user ? user_path(current_user) : root_path %>"/>Home</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -31,7 +31,16 @@
 
     <!-- content -->
     <div class="container"  role="main">
+      <%= content_tag(:div, flash[:error], :id => "flash_error") if flash[:error] %>
+      <%= content_tag(:div, flash[:notice], :id => "flash_notice") if flash[:notice] %>
+      <%= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
+
       <%= yield %>
+      <br>
+      <% if current_user %>
+        <%= link_to "Log Out", logout_path, method: :delete %>
+      <% end %>
+
     </div>
 
   </body>
